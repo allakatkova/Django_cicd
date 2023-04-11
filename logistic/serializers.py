@@ -1,4 +1,4 @@
-from pprint import pprint
+# from pprint import pprint
 
 from rest_framework import serializers
 
@@ -41,8 +41,10 @@ class StockSerializer(serializers.ModelSerializer):
         print(validated_data)
         # заполняем связанные таблицы
         for position in positions:
-            StockProduct.objects.create(stock=stock, product=position['product'],
-                                        quantity=position['quantity'], price=position['price'])
+            StockProduct.objects.create(stock=stock,
+                                        product=position['product'],
+                                        quantity=position['quantity'],
+                                        price=position['price'])
 
         return stock
 
@@ -56,7 +58,11 @@ class StockSerializer(serializers.ModelSerializer):
         print(validated_data)
         # обновляем связанные таблицы
         for position in positions:
-            StockProduct.objects.update_or_create(stock=stock, product=position['product'],
-                                                  defaults={'quantity': position['quantity'], 'price': position['price']})
+            product = position['product']
+            defaults = {'quantity': position['quantity'],
+                        'price': position['price']}
+            StockProduct.objects.update_or_create(stock=stock,
+                                                  product=product,
+                                                  defaults=defaults)
 
         return
