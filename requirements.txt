@@ -10,5 +10,3 @@ pytz==2023.3
 sqlparse
 requests
 flake8
-unittest
-rest_framework
