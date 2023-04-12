@@ -66,8 +66,11 @@ jobs:
           host: ${{ secrets.HOST_NAME }}
           username: ${{ secrets.HOST_USER }}
           password: ${{ secrets.HOST_PASSWORD }}
-          script:
-            cd /home/allaka/Django_cicd
-            # https://github.com/allakatkova/Django_cicd.git
-            git pull origin master
-            
+          script: expect /home/allaka/Django_cicd/deploy.exp
+
+          # script:
+          #   cd /home/allaka/Django_cicd
+          #   git pull origin master
+          #   source env/bin/activate
+          #   python manage.py migrate
+          #   sudo systemctl restart gunicorn
